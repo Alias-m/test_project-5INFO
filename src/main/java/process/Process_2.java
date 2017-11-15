@@ -1,0 +1,13 @@
+package process;
+
+import project.AbstractProcess;
+import spoon.reflect.CtModel;
+
+/**
+ * Created by Mathieu on 19/10/2017.
+ */
+public class Process_2 extends AbstractProcess {
+    public void process(CtModel model)
+    {
+    }
+}
