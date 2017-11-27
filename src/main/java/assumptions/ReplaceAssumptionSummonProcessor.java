@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assumptions;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.*;
 import spoon.reflect.reference.CtExecutableReference;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -84,12 +86,14 @@ public class ReplaceAssumptionSummonProcessor extends AbstractProcessor<CtInvoca
             List<CtExpression> l = object.getArguments();
             if(l.size() == 3)
                 l.remove(0);
-            System.out.println("THAT: "+l.get(0).getClass());
             CtInvocation invocation = object.getFactory().createInvocation();
             invocation.setExecutable(object.getFactory().createExecutableReference());
             invocation.getExecutable().setSimpleName("equals");
             invocation.setTarget(l.get(0));
             invocation.setArguments(((CtInvocation)l.get(1)).getArguments());
+            List<CtExpression<?>> args = new ArrayList<>();
+            args.add(invocation);
+            object.setArguments(args);
             generateLambda(object);
         });
     }

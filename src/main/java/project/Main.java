@@ -20,7 +20,7 @@ public class Main
     {
         Launcher launcher = new Launcher();
 
-        launcher.addInputResource("src/test/java/UserTest.java");
+        launcher.addInputResource("src/test");
         launcher.getEnvironment().setAutoImports(true); // optional
         launcher.getEnvironment().setNoClasspath(true); // optional
         processes.add(new ProcessAnnotations());

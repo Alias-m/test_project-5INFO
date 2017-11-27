@@ -21,34 +21,40 @@ public class ReplaceAnnotationProcessor<T extends CtElement> extends AbstractPro
         Map<CtAnnotation<? extends  Annotation>, Class<? extends  Annotation>> conversion = new HashMap<>();
 
         for (CtAnnotation annotation : annot){
-            annot2.add(annotation);
-            switch (annotation.getActualAnnotation().annotationType().getSimpleName()){
-                case "Before" :
-                    conversion.put(annotation, BeforeEach.class);
-                    break;
-                case "After" :
-                    conversion.put(annotation, AfterEach.class);
-                    break;
-                case "BeforeClass" :
-                    conversion.put(annotation, BeforeAll.class);
-                    break;
-                case "AfterClass" :
-                    conversion.put(annotation, AfterAll.class);
-                    break;
-                case "Ignore" :
-                    conversion.put(annotation, Disabled.class);
-                    break;
-                case "Category" :
-                    conversion.put(annotation, Tag.class);
-                    break;
-                case "RunWith" :
-                case "Rule" :
-                case "ClassRule" :
-                    conversion.put(annotation, ExtendWith.class);
-                    break;
-                default :
-                    annot2.remove(annotation);
-                    break;
+            try
+            {
+                annot2.add(annotation);
+                switch (annotation.getActualAnnotation().annotationType().getSimpleName()){
+                    case "Before" :
+                        conversion.put(annotation, BeforeEach.class);
+                        break;
+                    case "After" :
+                        conversion.put(annotation, AfterEach.class);
+                        break;
+                    case "BeforeClass" :
+                        conversion.put(annotation, BeforeAll.class);
+                        break;
+                    case "AfterClass" :
+                        conversion.put(annotation, AfterAll.class);
+                        break;
+                    case "Ignore" :
+                        conversion.put(annotation, Disabled.class);
+                        break;
+                    case "Category" :
+                        conversion.put(annotation, Tag.class);
+                        break;
+                    case "RunWith" :
+                    case "Rule" :
+                    case "ClassRule" :
+                        conversion.put(annotation, ExtendWith.class);
+                        break;
+                    default :
+                        annot2.remove(annotation);
+                        break;
+                }
+            }
+            catch(Exception e){
+
             }
         }
 

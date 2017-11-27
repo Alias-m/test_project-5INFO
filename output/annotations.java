@@ -1,28 +1,42 @@
-import org.junit.*;
+
+
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.runner.RunWith;
 
-@Ignore
+@Disabled
 public class annotations {
-    @Before
+    @BeforeEach
     public void before() {
     }
-    @After
+
+    @AfterEach
     public void after() {
     }
-    @BeforeClass
+
+    @BeforeAll
     public void beforeclass() {
     }
-    @AfterClass
+
+    @AfterAll
     public void afterclass() {
     }
-    @Ignore
+
+    @Disabled
     public void ignore() {
     }
-    @Category(Ignore.class)
+
+    @Tag(Ignore.class)
     public void category() {
     }
 }
+

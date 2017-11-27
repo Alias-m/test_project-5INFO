@@ -1,10 +1,9 @@
-package part2;
-
 import org.junit.*;
+
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assume.assumeNotNull;
 import static org.junit.Assume.assumeThat;
 import static org.junit.Assume.assumeTrue;
-
 
 public class assumptions {
     @Test

@@ -36,20 +36,22 @@ public class ReplaceExceptedExceptionProcessor extends AbstractProcessor<CtMetho
 					annot2.add(annotation);
 
 					CtFieldReadImpl valueExpected = (CtFieldReadImpl) annotation.getValues().get("expected");
+					if(valueExpected != null)
+					{
+						CtInvocation invocation = object.getFactory().createInvocation();
+						invocation.setExecutable(object.getFactory().createExecutableReference());
+						invocation.getExecutable().setDeclaringType(object.getFactory().createCtTypeReference(Assertions.class));
+						invocation.getExecutable().setSimpleName("assertThrows");
 
-					CtInvocation invocation = object.getFactory().createInvocation();
-					invocation.setExecutable(object.getFactory().createExecutableReference());
-					invocation.getExecutable().setDeclaringType(object.getFactory().createCtTypeReference(Assertions.class));
-					invocation.getExecutable().setSimpleName("assertThrows");
 
+						CtLambda l = new CtLambdaImpl();
+						l.setBody(object.getBody());
 
-					CtLambda l = new CtLambdaImpl();
-					l.setBody(object.getBody());
+						invocation.addArgument(valueExpected);
+						invocation.addArgument(l);
 
-					invocation.addArgument(valueExpected);
-					invocation.addArgument(l);
-
-					object.setBody(invocation);
+						object.setBody(invocation);
+					}
 
 				}
 			}
